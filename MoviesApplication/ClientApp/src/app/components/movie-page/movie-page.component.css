@@ -1,0 +1,42 @@
+.movie-details {
+  color: rgb(143, 63, 63);
+}
+h5 {
+  color: rgba(255, 255, 255, 0.452);
+}
+.play_button {
+  height: 20px;
+  width: 100%;
+}
+.txt {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+.trailer {
+  margin: 5px;
+  width: 94%;
+}
+.actor-list h4 {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  color: blueviolet;
+  margin: 4px;
+}
+.button-plus-one {
+  width: 20px;
+  height: 20px;
+  font-size: smaller;
+}
+h3 {
+  display: inline;
+}
+.movie-data {
+  color: #ededed;
+  display: inline;
+}
+
+.movie-data a {
+  color: #c5de47;
+  display: inline;
+}

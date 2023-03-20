@@ -1,0 +1,22 @@
+<div *ngIf="service.currentYearMovie.length >= 4">
+  <div>
+    <owl-carousel-o [options]="carouselOptions">
+      <ng-container *ngFor="let movie of service.currentYearMovie">
+        <ng-template carouselSlide [id]="movie.id">
+          <a [routerLink]="['/movie', movie.id]"
+            ><img src="/assets/img/{{ movie.posterUrl }}" class="movie-image"
+          /></a>
+          <h2>{{ movie.title }}</h2>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+  </div>
+</div>
+<div *ngIf="service.currentYearMovie.length < 4" class="row">
+  <div *ngFor="let movie of service.currentYearMovie" class="col-md-3">
+    <a [routerLink]="['/movie', movie.id]"
+      ><img src="/assets/img/{{ movie.posterUrl }}" class="movie-image"
+    /></a>
+    <h2>{{ movie.title }}</h2>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<header>
+  <div class="menu">
+    <nav
+      class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-black border-bottom box-shadow mb-3"
+    >
+      <div class="container">
+        <a class="navbar-brand" [routerLink]="['/']">MoviesApplication</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target=".navbar-collapse"
+          aria-label="Toggle navigation"
+          [attr.aria-expanded]="isExpanded"
+          (click)="toggle()"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
+          [ngClass]="{ show: isExpanded }"
+        >
+          <ul class="navbar-nav flex-grow">
+            <li
+              class="nav-item"
+              [routerLinkActive]="['link-active']"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a class="nav-link" [routerLink]="['/']">Home</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+              <a class="nav-link" [routerLink]="['/movies']">Movies</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+              <a class="nav-link" [routerLink]="['/actors']">Actors</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+              <a class="nav-link" [routerLink]="['/addMovie']">Add</a>
+            </li>
+
+            <li
+              *ngIf="isLoggedIn(); else loginTemplate"
+              class="nav-item"
+              [routerLinkActive]="['link-active']"
+            >
+              <a class="nav-link" [routerLink]="['/']" (click)="logout()"
+                >Logout</a
+              >
+            </li>
+            <ng-template #loginTemplate>
+              <li class="nav-item" [routerLinkActive]="['link-active']">
+                <a class="nav-link" [routerLink]="['/registration']">Sign up</a>
+              </li>
+
+              <li
+                *ngIf="authService.loggedIn"
+                class="nav-item"
+                [routerLinkActive]="['link-active']"
+              >
+                <a class="nav-link" [routerLink]="['/login']">Sign in</a>
+              </li>
+            </ng-template>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,14 @@
+<div class="row actor-block">
+  <div *ngFor="let a of service.actors" class="col-md-3">
+    <div class="actor-item">
+      <a [routerLink]="['/actor', a.id]"
+        ><img
+          src="/assets/img/{{ a.secondName }}_{{ a.name }}.jpg"
+          class="actor-image"
+      /></a>
+      <h4 class="name">
+        <a [routerLink]="['/actor', a.id]">{{ a.name }} {{ a.secondName }}</a>
+      </h4>
+    </div>
+  </div>
+</div>

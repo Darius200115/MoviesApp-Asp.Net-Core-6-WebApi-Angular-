@@ -1,0 +1,23 @@
+<div class="row movies-block">
+  <div
+    *ngFor="
+      let m of service.movies
+        | paginate : { itemsPerPage: 8, currentPage: page }
+    "
+    class="col-md-3"
+  >
+    <div class="movie-item">
+      <a [routerLink]="['/movie', m.id]"
+        ><img src="/assets/img/{{ m.posterUrl }}" class="movie-image"
+      /></a>
+      <h4 class="title">
+        <a [routerLink]="['/movie', m.id]">{{ m.title }} </a>
+      </h4>
+    </div>
+  </div>
+</div>
+<div class="page-controls row">
+  <div class="col-12">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+</div>

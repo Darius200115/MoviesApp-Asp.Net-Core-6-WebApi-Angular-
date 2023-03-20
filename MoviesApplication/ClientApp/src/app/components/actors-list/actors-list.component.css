@@ -1,0 +1,14 @@
+.actor-image {
+  height: 350px;
+  width: 250px;
+}
+.actor-item {
+  padding: auto;
+  margin: auto;
+}
+.actor-block {
+  position: relative;
+}
+.name a {
+  color: white;
+}

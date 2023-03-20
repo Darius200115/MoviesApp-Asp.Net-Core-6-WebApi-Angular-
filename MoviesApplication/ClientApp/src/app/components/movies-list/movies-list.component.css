@@ -1,0 +1,14 @@
+.movie-image {
+  height: 350px;
+  width: 100%;
+}
+.movie-item {
+  padding: auto;
+  margin: auto;
+}
+.movies-block {
+  position: relative;
+}
+.title a {
+  color: white;
+}

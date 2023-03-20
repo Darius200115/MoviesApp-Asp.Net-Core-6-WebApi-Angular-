@@ -1,0 +1,8 @@
+.cross {
+  display: flex;
+  justify-content: right;
+}
+
+::ng-deep .app-movie {
+  background-color: black;
+}

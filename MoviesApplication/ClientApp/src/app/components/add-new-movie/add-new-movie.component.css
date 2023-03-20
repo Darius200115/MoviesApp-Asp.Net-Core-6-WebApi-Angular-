@@ -1,0 +1,49 @@
+a {
+  color: white;
+}
+a:hover {
+  color: rgb(204, 26, 26);
+}
+.ckecklabel {
+  color: rgb(240, 165, 2);
+}
+
+/* приховуємо оригінальний checkbox */
+/* input[type="checkbox"] {
+  display: none;
+} */
+
+/* створюємо вигляд нового checkbox */
+.checkmark {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  position: relative;
+  margin-right: 10px;
+}
+
+/* додаємо знак галочки, якщо checkbox вибраний */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* показуємо знак галочки, якщо checkbox вибраний */
+input[type="checkbox"]:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* змінюємо колір знака галочки */
+.checkmark:after {
+  left: 6px;
+  top: 1px;
+  width: 4px;
+  height: 9px;
+  border: solid #333;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}

@@ -1,0 +1,9 @@
+.foto {
+  height: 500px;
+  width: 350px;
+  position: relative;
+}
+h2 {
+  color: rgb(239, 239, 49);
+  text-align: left;
+}

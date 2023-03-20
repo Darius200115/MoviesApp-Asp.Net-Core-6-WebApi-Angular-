@@ -1,0 +1,77 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+body {
+  background: linear-gradient(
+      0,
+      #60479f 0,
+      #3f337c 25%,
+      #1f1f59 50%,
+      #030937 75%,
+      #00001b 100%
+    )
+    no-repeat center center fixed;
+
+  background-size: 100%;
+}
+
+label {
+  color: white;
+}
+.movie-image {
+  height: 350px;
+  width: 250px;
+}
+
+.poster {
+  height: 500px;
+  width: 93%;
+  position: relative;
+}
+h1 {
+  color: rgb(255, 255, 255);
+  text-align: center;
+  word-wrap: break-word;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+h2 {
+  color: rgb(23, 13, 13);
+  text-align: center;
+  word-wrap: break-word;
+}
+.page-controls {
+  text-align: center;
+}
+label {
+  color: rgb(0, 0, 0);
+}
+.input-form {
+  background-color: rgba(255, 255, 255, 0.974);
+  padding: 25px 15px;
+  border-radius: 10px;
+}
+.buttons {
+  text-align: center;
+}
