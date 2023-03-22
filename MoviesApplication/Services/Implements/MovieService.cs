@@ -51,5 +51,15 @@ namespace MoviesApplication.Services.Implements
         {
             return await _ctx.Movies.Where(m => m.ReleaseDate.Value.Year == DateTime.Now.Year).ToListAsync();
         }
+
+        public async Task<Movie> AddActorToMovieAsync(Guid movieId, Guid actorId)
+        {
+            var movie = await GetMovieByIdAsync(movieId);
+            var actor = await _ctx.Actors.Where(a => a.Id == actorId).FirstOrDefaultAsync();
+            movie.Actors.Add(actor);
+            return movie;            
+        }
+
+
     }
 }

@@ -115,22 +115,21 @@ namespace MoviesApplication.Controllers
         [Route("{movieId:Guid}/AddActor/{actorId:Guid}")]
         public async Task<IActionResult> AddActorToMovie(Guid actorId, Guid movieId)
         {
-
             try
             {
-                var movie = await _MovieService.GetMovieByIdAsync(movieId);
-                var actor = await _actorService.GetActorByIdAsync(actorId);
-                if (movie == null || actor == null)
-                {
-                    return NotFound();
-                }
+                //var movie = await _MovieService.GetMovieByIdAsync(movieId);
+                //var actor = await _actorService.GetActorByIdAsync(actorId);
+                return Ok(_MovieService.AddActorToMovieAsync(movieId, actorId));
+                //if (movie == null)
+                //{
+                //    return NotFound();
+                //}
+                //movie.Actors.Add(actor);
 
-                movie.Actors.Add(actor);
-
-                if (_MovieService.SaveAll())
-                {
-                    return Ok(movie);
-                }
+                //if (_MovieService.SaveAll())
+                //{
+                    //return Ok(movie);
+                //}
             }
             catch (Exception ex)
             {
@@ -138,6 +137,30 @@ namespace MoviesApplication.Controllers
             }
             return BadRequest("Failed to add actor to movie!");
         }
+
+        //[HttpDelete]
+        //[Route("{movieId:Guid}/RemoveActor/{actorId:Guid}")]
+        //public async Task<IActionResult> RemoveActorFromMovie(Guid actorId, Guid movieId)
+        //{
+        //    try
+        //    {
+        //        var movie = _MovieService.GetMovieByIdAsync(movieId);
+        //        var actor = _actorService.GetActorByIdAsync(actorId);
+        //        if(movie == null || actor == null)
+        //        {
+        //            return NotFound();
+        //        }
+                
+        //        movie
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError($"Failed to remove actor from movie : {ex}");
+
+        //        throw;
+        //    }
+        //    return BadRequest("Failed to remove actor from movie!");
+        //}
 
 
         [HttpDelete("{id:Guid}")]

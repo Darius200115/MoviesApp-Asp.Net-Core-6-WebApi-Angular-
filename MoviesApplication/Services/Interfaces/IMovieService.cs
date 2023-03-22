@@ -8,6 +8,7 @@ namespace MoviesApplication.Services.Interfaces
         Task<Movie> GetMovieByIdAsync(Guid id);
         Task<List<Movie>> GetRecomended();
         Task<List<Movie>> GetReleasedThisYear();
+        Task<Movie> AddActorToMovieAsync(Guid movieId, Guid actorId);
         void AddEntity(object model);
         bool SaveAll();
         void RemoveEntity(object model);
