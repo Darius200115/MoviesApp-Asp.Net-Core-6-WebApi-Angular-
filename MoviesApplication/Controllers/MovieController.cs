@@ -119,7 +119,7 @@ namespace MoviesApplication.Controllers
             {
                 //var movie = await _MovieService.GetMovieByIdAsync(movieId);
                 //var actor = await _actorService.GetActorByIdAsync(actorId);
-                return Ok(_MovieService.AddActorToMovieAsync(movieId, actorId));
+                return Ok(await _MovieService.AddActorToMovieAsync(movieId, actorId));
                 //if (movie == null)
                 //{
                 //    return NotFound();
@@ -138,29 +138,22 @@ namespace MoviesApplication.Controllers
             return BadRequest("Failed to add actor to movie!");
         }
 
-        //[HttpDelete]
-        //[Route("{movieId:Guid}/RemoveActor/{actorId:Guid}")]
-        //public async Task<IActionResult> RemoveActorFromMovie(Guid actorId, Guid movieId)
-        //{
-        //    try
-        //    {
-        //        var movie = _MovieService.GetMovieByIdAsync(movieId);
-        //        var actor = _actorService.GetActorByIdAsync(actorId);
-        //        if(movie == null || actor == null)
-        //        {
-        //            return NotFound();
-        //        }
-                
-        //        movie
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError($"Failed to remove actor from movie : {ex}");
+        [HttpDelete]
+        [Route("{movieId:Guid}/remove/{actorId:Guid}")]
+        public async Task<IActionResult> RemoveActorFromMovie(Guid movieId, Guid actorId)
+        {
+            try
+            {
+               return Ok(await _MovieService.RemoveActorFromMovie(movieId, actorId));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to remove actor from movie : {ex}");
 
-        //        throw;
-        //    }
-        //    return BadRequest("Failed to remove actor from movie!");
-        //}
+                throw;
+            }
+            return BadRequest("Failed to remove actor from movie!");
+        }
 
 
         [HttpDelete("{id:Guid}")]
@@ -188,6 +181,23 @@ namespace MoviesApplication.Controllers
                 _logger.LogError($"Failed to delete movie: {ex}");
             }
             return BadRequest("Failed to delete movie!");
+        }
+
+        [HttpPut("{id:Guid}/score/{IsLike:bool}")]
+        public async Task<int> Put(Guid id, bool IsLike)
+        {
+            try
+            {
+                if (IsLike)
+                    return await _MovieService.IncreaseLikes(id);
+                else
+                    return await _MovieService.IncreaseDislikes(id);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to get actor: {ex}");
+                return 0;
+            }
         }
 
     }

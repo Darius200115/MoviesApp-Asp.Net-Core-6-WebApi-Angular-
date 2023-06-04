@@ -57,9 +57,35 @@ namespace MoviesApplication.Services.Implements
             var movie = await GetMovieByIdAsync(movieId);
             var actor = await _ctx.Actors.Where(a => a.Id == actorId).FirstOrDefaultAsync();
             movie.Actors.Add(actor);
+            SaveAll();
             return movie;            
         }
 
+        public async Task<Movie> RemoveActorFromMovie(Guid movieId, Guid actorId)
+        {
+            var movie = await GetMovieByIdAsync(movieId);
+            var actor = await _ctx.Actors.Where(a => a.Id == actorId).FirstOrDefaultAsync();
+            movie.Actors.Remove(actor);
+            SaveAll();
+            return movie;
+            
+        }
 
+        public async Task<int> IncreaseLikes(Guid id)
+        {
+            var movie = await GetMovieByIdAsync(id);
+            movie.Likes++;
+            SaveAll();
+            return movie.Likes;
+            
+        }
+
+        public async Task<int> IncreaseDislikes(Guid id)
+        {
+            var movie = await GetMovieByIdAsync(id);
+            movie.Dislikes++;
+            SaveAll();
+            return movie.Dislikes;
+        }
     }
 }

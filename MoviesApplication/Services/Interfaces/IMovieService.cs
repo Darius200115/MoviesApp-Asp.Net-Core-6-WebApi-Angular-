@@ -1,4 +1,5 @@
-﻿using MoviesApplication.Data.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using MoviesApplication.Data.Models;
 
 namespace MoviesApplication.Services.Interfaces
 {
@@ -12,5 +13,8 @@ namespace MoviesApplication.Services.Interfaces
         void AddEntity(object model);
         bool SaveAll();
         void RemoveEntity(object model);
+        Task<Movie> RemoveActorFromMovie(Guid movieId, Guid actorId );
+        Task<int> IncreaseLikes(Guid id);
+        Task<int> IncreaseDislikes(Guid id);
     }
 }
