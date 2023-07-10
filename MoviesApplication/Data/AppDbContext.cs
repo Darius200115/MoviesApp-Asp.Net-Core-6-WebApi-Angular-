@@ -22,6 +22,12 @@ namespace MoviesApplication.Data
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer(_cfg["ConnectionStrings:MainConnectionString"]);
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.ApplyConfiguration(new RoleConfiguration());
+        }
 
     }
 }

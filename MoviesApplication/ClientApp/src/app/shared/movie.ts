@@ -15,4 +15,6 @@ export class Movie {
   posterUrl!: string | null;
   directors!: Director[] | null;
   actors!: Actor[] | null;
+  likes!: number;
+  dislikes: number;
 }

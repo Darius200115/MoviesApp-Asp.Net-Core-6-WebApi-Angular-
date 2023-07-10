@@ -100,7 +100,9 @@ namespace MoviesApplication.Migrations
                     AgeRating = table.Column<int>(type: "int", nullable: true),
                     MovieUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TrailerUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PosterUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    PosterUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Likes = table.Column<int>(type: "int", nullable: false),
+                    Dislikes = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {

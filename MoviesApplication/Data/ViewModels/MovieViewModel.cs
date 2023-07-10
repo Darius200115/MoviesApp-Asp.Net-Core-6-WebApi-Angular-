@@ -17,6 +17,8 @@ namespace MoviesApplication.Data.ViewModels
         public string MovieUrl { get; set; }
         public string TrailerUrl { get; set; }
         public string PosterUrl { get; set; }
+        public int Likes { get; set; } = 0;
+        public int Dislikes { get; set; } = 0;
         public ICollection<Director>? Directors { get; set; }
         public ICollection<Actor>? Actors { get; set; }
       

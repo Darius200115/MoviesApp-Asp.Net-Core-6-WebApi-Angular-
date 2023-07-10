@@ -32,6 +32,8 @@ import { ActorsDialogComponent } from './components/movie-page/actors-dialog/act
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { AccountService } from './services/account.service';
 import { RegistrationPageComponent } from './components/registration-page/registration-page.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [
@@ -66,8 +68,8 @@ import { RegistrationPageComponent } from './components/registration-page/regist
     NgxPaginationModule,
     ReactiveFormsModule,
     MatInputModule,
-
     router,
+    FontAwesomeModule,
   ],
   providers: [MovieService, ActorService, AccountService],
   bootstrap: [AppComponent],

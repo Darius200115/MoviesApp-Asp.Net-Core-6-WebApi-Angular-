@@ -25,6 +25,10 @@ export class ActorService {
       .subscribe(() => {});
   }
 
+  removeActorFromMovie(movieId: string, actorId: string) {
+    return this.http.delete<Movie>(`/api/movie/${movieId}/remove/${actorId}`);
+  }
+
   loadMovieById(id: string): Observable<Actor> {
     return this.http
       .get<Actor>('/api/actor/' + id)

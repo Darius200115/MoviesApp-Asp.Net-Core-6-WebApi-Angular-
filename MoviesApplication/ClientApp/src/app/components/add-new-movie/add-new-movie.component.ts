@@ -26,6 +26,8 @@ export class AddNewMovieComponent {
     posterUrl: '',
     directors: [],
     actors: [],
+    likes: 0,
+    dislikes: 0,
   };
   errorMessage = '';
 

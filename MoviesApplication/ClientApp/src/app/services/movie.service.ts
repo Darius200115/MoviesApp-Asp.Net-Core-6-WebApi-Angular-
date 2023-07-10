@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { Actor } from '../shared/actor';
 import { Movie } from '../shared/movie';
 
@@ -13,6 +13,9 @@ export class MovieService {
   public currentYearMovie: Movie[] = [];
   public newMovie: Movie = new Movie();
 
+  private _movie$: BehaviorSubject<Movie> = new BehaviorSubject(new Movie());
+  public movie$: Observable<Movie> = this._movie$.asObservable();
+
   loadMovies(): Observable<void> {
     return this.http.get<[]>('/api/movie/GetMovies').pipe(
       map((data) => {
@@ -23,9 +26,12 @@ export class MovieService {
   }
 
   loadMovieById(id: string): Observable<Movie> {
-    return this.http
-      .get<Movie>('/api/movie/' + id)
-      .pipe(tap(() => console.log('Get movie id=${id}')));
+    return this.http.get<any>('/api/movie/' + id).pipe(
+      tap((data) => {
+        this._movie$.next(data);
+        console.log('Get movie id=${id}');
+      })
+    );
   }
 
   postMovie(movie: Movie) {
@@ -57,4 +63,9 @@ export class MovieService {
       })
     );
   }
+
+  IncrementLikes(id: string, IsLike: boolean) {
+    return this.http.put<any>(`/api/movie/${id}/score/${IsLike}`, null);
+  }
+
 }

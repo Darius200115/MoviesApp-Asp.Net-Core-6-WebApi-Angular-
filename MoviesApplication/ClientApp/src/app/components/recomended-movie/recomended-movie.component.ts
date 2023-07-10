@@ -11,13 +11,19 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 export class RecomendedMovieComponent implements OnInit {
   movies: Movie[];
   customOptions: OwlOptions;
-  
+
   carouselOptions = {
+    autoplay: true,
+    slideTransition: 'linear',
     minItems: 5,
     loop: true,
+    autoWidth: true,
     margin: 10,
-    nav: true,
-    dots: false,
+    smartSpeed: 5000,
+    autoplaySpeed: 5000,
+    autoplayTimeout: 5500,
+    nav: false,
+    dots: true,
     responsive: {
       0: {
         items: 1,

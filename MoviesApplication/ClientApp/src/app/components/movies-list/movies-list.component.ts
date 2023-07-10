@@ -13,5 +13,6 @@ export class MoviesListComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.loadMovies().subscribe(() => {});
+    
   }
 }

@@ -11,6 +11,9 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { MovieDialogComponent } from './movie-dialog/movie-dialog.component';
 import { ActorsDialogComponent } from './actors-dialog/actors-dialog.component';
+import { ActorService } from 'src/app/services/actor.service';
+import { Observable } from 'rxjs';
+import { AccountService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-movie-page',
@@ -18,31 +21,50 @@ import { ActorsDialogComponent } from './actors-dialog/actors-dialog.component';
   styleUrls: ['./movie-page.component.css'],
 })
 export class MoviePageComponent implements OnInit {
-  public movie: Movie = new Movie();
   baseUrl = 'https://www.youtube.com/embed/';
   properties = '?controls=0';
   public safeUrl!: SafeResourceUrl | null;
   public errorMessage = '';
   url: string;
 
+  public movie$: Observable<Movie> = this.movieService.movie$!;
+  public movieid: string;
+  // public movieSub!: Movie;
+
+  public isLike: boolean = true;
+
   constructor(
-    private service: MovieService,
+    private movieService: MovieService,
+    private actorService: ActorService,
     private activatedRoute: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private authService: AccountService
   ) {}
 
   ngOnInit() {
-    let MovieId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.service.loadMovieById(MovieId!).subscribe((m) => {
-      this.movie = m;
-      this.url = m.trailerUrl!;
+    const MovieId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.movieid = MovieId!;
+    this.movieService.loadMovieById(MovieId!).subscribe({
+      next: (data) => {
+        this.url = data.trailerUrl;
+      },
     });
+    this.movieService.movie$.subscribe(() => {});
+    // this.movie$.subscribe((data) => {
+    //   this.movie = data;
+    //   this.url = data.trailerUrl!;
+    // });
+
+    // this.movieService.loadMovieById(MovieId!).subscribe((m) => {
+    //   this.movie$ = m;
+    //   this.url = m.trailerUrl!;
+    // });
   }
 
   remove(id: string) {
-    this.service.removeMovie(id).subscribe({
+    this.movieService.removeMovie(id).subscribe({
       next: () => {
         this.router.navigate(['/']);
         alert('Movie deleted success');
@@ -53,13 +75,43 @@ export class MoviePageComponent implements OnInit {
     });
   }
 
+  onLike(id: string) {
+    const user = this.authService.getUserEmail();
+    this.movieService.IncrementLikes(id, this.isLike).subscribe({
+      next: () => {},
+      error: (err: any) => {
+        console.log('Failed to like movie');
+      },
+    });
+  }
+
+  onDislike(id: string) {
+    this.movieService.IncrementLikes(id, this.isLike).subscribe({
+      next: () => {},
+      error: (err: any) => {
+        console.log('Failed to like movie');
+      },
+    });
+  }
+
+  changeIsLike(value: boolean) {
+    this.isLike = value;
+  }
+  removeActor(movieId: string, actorId: string) {
+    this.actorService.removeActorFromMovie(movieId, actorId).subscribe({
+      next: () => {
+        location.reload();
+        console.log(movieId, actorId);
+      },
+    });
+  }
+
   openActorDialog(): void {
     const dialogRef = this.dialog.open(ActorsDialogComponent, {
       width: '250px',
-      data: { movieId: this.movie.id },
+      data: { movieId: this.movieid },
     });
-
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
   }

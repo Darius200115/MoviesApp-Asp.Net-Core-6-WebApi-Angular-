@@ -10,13 +10,17 @@ export class ThisYearReleasedComponent implements OnInit {
   constructor(public service: MovieService) {}
 
   carouselOptions = {
+    autoplay: true,
+    slideTransition: 'linear',
+    autoplaySpeed: 1000,
     minItems: 5,
     loop: true,
-    autoWidth: true,
     margin: 10,
-    nav: true,
-    dots: false,
-
+    interval: 100,
+    smartSpeed: 500,
+    nav: false,
+    autoplayMouseleaveTimeout: 1,
+    dots: true,
     responsive: {
       0: {
         items: 1,
@@ -33,7 +37,7 @@ export class ThisYearReleasedComponent implements OnInit {
       },
     },
   };
-                                                                                              
+
   ngOnInit(): void {
     this.service.getCurrentYearMovies().subscribe(() => {});
   }

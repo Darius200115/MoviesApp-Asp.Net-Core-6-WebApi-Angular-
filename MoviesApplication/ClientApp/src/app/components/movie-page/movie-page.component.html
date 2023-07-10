@@ -1,7 +1,8 @@
 <div class="row">
-  <div class="col-md-4">
+  <div *ngIf="movie$ | async as movie" class="col-md-4">
     <h1>{{ movie.title }}</h1>
     <img src="/assets/img/{{ movie.posterUrl }}" class="poster" />
+    
     <div class="trailer">
       <button
         type="button"
@@ -16,7 +17,7 @@
     </div>
   </div>
 
-  <div class="col-md-8">
+  <div class="col-md-8" *ngIf="movie$ | async as movie">
     <br />
     <br />
     <div class="row">
@@ -49,7 +50,16 @@
           <a [routerLink]="['/actor', actor.id]"
             >{{ actor.name }} {{ actor.secondName }}
           </a>
-          &nbsp;, &nbsp;
+          &nbsp;
+          <button
+            class="button-delete"
+            type="button"
+            mat-fab
+            color="warn"
+            (click)="removeActor(movie.id, actor.id)"
+          >
+            X</button
+          >, &nbsp;
         </div>
       </div>
       <br />
@@ -66,6 +76,17 @@
       </button>
     </div>
 
+    <button class="like-button" (click)="onLike(movie.id)">
+      <i class="fa-regular fa-thumbs-up"></i>
+      <span>Like {{ movie.likes }}</span>
+    </button>
+    <button
+      class="dislike-button"
+      (click)="onDislike(movie.id); changeIsLike(false)"
+    >
+      <i class="fa-regular fa-thumbs-down"></i>
+      <span>Dislike</span>
+    </button>
     <br />
     <br />
   </div>

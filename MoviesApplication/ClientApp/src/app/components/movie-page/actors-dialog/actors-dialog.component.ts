@@ -43,5 +43,6 @@ export class ActorsDialogComponent {
   selectActor(actor: any) {
     this.actorService.addActorToMovie(this.data.movieId, actor.id);
     this.dialogRef.close();
+    location.reload();
   }
 }

@@ -22,7 +22,10 @@ export class LoginPageComponent {
         console.log('Login successful');
         this.router.navigate(['/']);
       },
-      (error) => console.error(error)
+      (error) => {
+        console.error(error);
+        this.ErrorMessage = 'Invalid email or password';
+      }
     );
   }
 }
